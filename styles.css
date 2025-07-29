@@ -7,61 +7,61 @@
 }
 
 :root {
-    /* Enhanced College-themed Light Colors */
-    --primary-color: #1a237e; /* Deep blue */
-    --secondary-color: #0d47a1; /* Rich blue */
-    --accent-color: #c62828; /* University red */
-    --tertiary-color: #2e7d32; /* Forest green */
-    --quaternary-color: #f57c00; /* Academic orange */
-    --background-color: #f5f7fa;
+    /* Enhanced Yellow-themed Color Palette */
+    --primary-color: #f57f17; /* Deep amber */
+    --secondary-color: #ff8f00; /* Rich orange-yellow */
+    --accent-color: #ffc107; /* Golden yellow */
+    --tertiary-color: #ffeb3b; /* Bright yellow */
+    --quaternary-color: #fff176; /* Light yellow */
+    --background-color: #fffef7; /* Warm cream */
     --card-bg: #ffffff;
-    --text-primary: #212121;
-    --text-secondary: #546e7a;
-    --border-color: #e0e0e0;
-    --success-color: #2e7d32; /* Forest green */
-    --warning-color: #f57c00; /* Academic orange */
-    --danger-color: #c62828; /* University red */
-    --sidebar-bg: #f5f7fa;
-    --hover-color: #eceff1;
-    --nav-active: #e3f2fd;
-    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --highlight-color: #ffb74d; /* Gold highlight */
-    --feature-bg: #e8eaf6; /* Light indigo */
+    --text-primary: #3e2723; /* Dark brown for contrast */
+    --text-secondary: #5d4037; /* Medium brown */
+    --border-color: #ffe082; /* Light yellow border */
+    --success-color: #689f38; /* Olive green */
+    --warning-color: #ff8f00; /* Orange-yellow */
+    --danger-color: #d84315; /* Deep orange-red */
+    --sidebar-bg: #fff8e1; /* Very light yellow */
+    --hover-color: #fff3c4; /* Soft yellow hover */
+    --nav-active: #ffecb3; /* Light amber */
+    --box-shadow: 0 4px 12px rgba(245, 127, 23, 0.15);
+    --highlight-color: #ffd54f; /* Medium yellow highlight */
+    --feature-bg: #fff9c4; /* Pale yellow */
     
-    /* New Theme Variables */
-    --university-gold: #ffc107;
-    --campus-green: #388e3c;
-    --scholar-purple: #673ab7;
-    --alumni-teal: #00796b;
+    /* Enhanced Yellow Theme Variables */
+    --university-gold: #ffb300; /* Rich gold */
+    --campus-amber: #ffa000; /* Deep amber */
+    --scholar-yellow: #fff59d; /* Pale yellow */
+    --alumni-bronze: #bf8f00; /* Bronze yellow */
     --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--quaternary-color));
-    --gradient-success: linear-gradient(135deg, var(--tertiary-color), var(--campus-green));
+    --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--tertiary-color));
+    --gradient-warm: linear-gradient(135deg, #fff176, #ffb74d);
+    --gradient-gold: linear-gradient(135deg, #ffd700, #ffb300);
 }
 
-/* Dark Theme */
+/* Dark Theme with Yellow Accents */
 html[data-theme='dark'] {
-    --primary-color: #283593; /* Darker blue */
-    --secondary-color: #1565c0; /* Darker rich blue */
-    --accent-color: #d32f2f; /* Darker university red */
-    --tertiary-color: #2e7d32; /* Forest green */
-    --quaternary-color: #e65100; /* Darker academic orange */
-    --background-color: #121212;
-    --card-bg: #1e1e1e;
-    --text-primary: #f5f5f5;
-    --text-secondary: #b0b0b0;
-    --border-color: #333333;
-    --sidebar-bg: #212121;
-    --hover-color: #2a2a2a;
-    --nav-active: #1e3a5f;
-    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    --highlight-color: #ff9800; /* Darker gold highlight */
-    --feature-bg: #1a237e; /* Dark indigo */
+    --primary-color: #ff8f00; /* Bright amber for dark mode */
+    --secondary-color: #ffa000; /* Rich amber */
+    --accent-color: #ffb300; /* Gold */
+    --tertiary-color: #ffc107; /* Golden yellow */
+    --quaternary-color: #ffca28; /* Light amber */
+    --background-color: #1a1a1a; /* Deep dark */
+    --card-bg: #2d2d2d; /* Dark gray */
+    --text-primary: #fff8e1; /* Light cream */
+    --text-secondary: #ffcc02; /* Yellow text */
+    --border-color: #4a4a4a; /* Dark border */
+    --sidebar-bg: #212121; /* Dark sidebar */
+    --hover-color: #3d3d3d; /* Dark hover */
+    --nav-active: #2e2e2e; /* Dark active */
+    --box-shadow: 0 4px 12px rgba(255, 143, 0, 0.2);
+    --highlight-color: #ffb300; /* Gold highlight */
+    --feature-bg: #2a2a2a; /* Dark feature bg */
     
-    /* New Theme Variables Dark Mode */
-    --university-gold: #ffa000;
-    --campus-green: #2e7d32;
-    --scholar-purple: #5e35b1;
-    --alumni-teal: #00695c;
+    --university-gold: #ffb300;
+    --campus-amber: #ffa000;
+    --scholar-yellow: #fff176;
+    --alumni-bronze: #bf8f00;
 }
 
 body {
@@ -85,9 +85,10 @@ main {
 }
 
 /* Navigation Styles */
+/* Enhanced Navigation with Yellow Theme */
 .nav-bar {
-    background: var(--gradient-primary);
-    color: white;
+    background: var(--gradient-gold);
+    color: #3e2723;
     padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -97,8 +98,9 @@ main {
     top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
     border-bottom: 3px solid var(--university-gold);
+    backdrop-filter: blur(10px);
 }
 
 .brand-container {
@@ -118,9 +120,11 @@ main {
 .nav-bar h1 {
     font-weight: 700;
     letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    position: relative;
-    margin-bottom: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #3e2723, #5d4037);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .nav-bar h1::after {
@@ -173,22 +177,42 @@ main {
 .nav-item a {
     display: flex;
     align-items: center;
-    color: white;
+    color: #3e2723;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    border-radius: 25px;
+    transition: all 0.3s ease;
     gap: 0.5rem;
     font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.nav-item a:hover::before {
+    left: 100%;
 }
 
 .nav-item a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-item.active a {
-    background-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
     font-weight: 600;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-item.active::after {
@@ -975,16 +999,26 @@ html[data-theme='dark'] .dark-icon {
 .card {
     background: var(--card-bg);
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(255, 193, 7, 0.1);
     border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-gold);
 }
 
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    border-color: var(--secondary-color);
+    box-shadow: 0 16px 48px rgba(255, 193, 7, 0.2);
 }
 
 .card-header {
@@ -1015,34 +1049,63 @@ html[data-theme='dark'] .dark-icon {
 }
 
 .stat-card {
-    background: var(--card-bg);
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    background: linear-gradient(135deg, var(--card-bg), var(--feature-bg));
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(255, 193, 7, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
-.stat-icon {
-    font-size: 36px;
-    margin-bottom: 10px;
-    color: var(--secondary-color);
+.stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-gold);
 }
 
-.stat-card h4 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: var(--text-secondary);
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 193, 7, 0.1) 0%, transparent 70%);
+    pointer-events: none;
 }
 
-.stat-card p {
-    font-size: 24px;
-    font-weight: 700;
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 48px rgba(255, 193, 7, 0.25);
+}
+
+.stat-number {
+    font-size: 3.2rem;
+    font-weight: 800;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Form Styles */
@@ -1109,16 +1172,35 @@ html[data-theme='dark'] .dark-icon {
     transform: scale(0.97);
 }
 
+/* Enhanced Button Styles with Yellow Theme */
 .btn-primary {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    box-shadow: 0 4px 10px rgba(26, 35, 126, 0.3);
+    box-shadow: 0 6px 20px rgba(245, 127, 23, 0.4);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
-    background: #151e69;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(26, 35, 126, 0.4);
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(245, 127, 23, 0.5);
 }
 
 .btn-secondary {
@@ -1785,14 +1867,15 @@ html[data-theme='dark'] .dark-icon {
     }
 }
 
-/* Enhanced Hero Section */
+/* Enhanced Hero Section with Yellow Theme */
 .hero-section {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('assests/images/campus-hero.jpg');
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.9), rgba(255, 143, 0, 0.8)), 
+                url('assests/images/campus-hero.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
-    border-radius: 8px;
+    color: #3e2723;
+    border-radius: 15px;
     padding: 5rem 2rem;
     margin-bottom: 2.5rem;
     text-align: center;
@@ -1801,39 +1884,48 @@ html[data-theme='dark'] .dark-icon {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 450px;
-    box-shadow: var(--box-shadow);
-    border-bottom: 4px solid var(--university-gold);
-}
-
-.hero-section h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    max-width: 800px;
+    min-height: 500px;
+    box-shadow: 0 8px 32px rgba(255, 193, 7, 0.3);
+    border: 2px solid var(--university-gold);
     position: relative;
 }
 
-.hero-section h1::after {
-    content: "";
+.hero-section::before {
+    content: '';
     position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: var(--university-gold);
-    border-radius: 2px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 235, 59, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 193, 7, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-section h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(45deg, #3e2723, #5d4037, #8d6e63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-section p {
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: 1.3rem;
     margin-bottom: 2.5rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    max-width: 700px;
-    opacity: 0.9;
+    max-width: 600px;
+    line-height: 1.6;
+    color: #3e2723;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 1;
 }
 
 .hero-buttons {
@@ -1928,16 +2020,27 @@ html[data-theme='dark'] .dark-icon {
 
 .feature-card {
     background-color: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: var(--box-shadow);
-    border-top: 4px solid var(--primary-color);
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(255, 193, 7, 0.1);
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-gold);
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 193, 7, 0.25);
 }
 
 .feature-card .feature-image {
@@ -1961,10 +2064,14 @@ html[data-theme='dark'] .dark-icon {
 }
 
 .feature-content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .feature-content p {
