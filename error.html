@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Smart School LMS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 80px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .error-code {
+            font-size: 100px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .error-actions .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 24px;
+            }
+            
+            .error-message {
+                font-size: 16px;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <span class="material-icons error-icon">error_outline</span>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-message">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">
+                    <span class="material-icons">home</span>
+                    Back to Home
+                </a>
+                <button onclick="history.back()" class="btn btn-outline">
+                    <span class="material-icons">arrow_back</span>
+                    Go Back
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize theme from localStorage
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+        
+        // Call the theme initialization function
+        initTheme();
+        
+        // Get error details from URL parameters
+        function getErrorDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorCode = urlParams.get('code') || '404';
+            const errorMessage = urlParams.get('message') || 'The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.';
+            
+            // Update the error display
+            document.querySelector('.error-code').textContent = errorCode;
+            document.querySelector('.error-message').textContent = errorMessage;
+            
+            // Update title based on error code
+            if (errorCode === '403') {
+                document.querySelector('.error-title').textContent = 'Access Forbidden';
+            } else if (errorCode === '500') {
+                document.querySelector('.error-title').textContent = 'Server Error';
+            } else if (errorCode === '401') {
+                document.querySelector('.error-title').textContent = 'Unauthorized Access';
+            }
+        }
+        
+        // Call the error details function
+        getErrorDetails();
+    </script>
+</body>
+</html> 

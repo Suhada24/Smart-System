@@ -1,0 +1,82 @@
+<div class="dashboard">
+    <aside class="sidebar">
+        <h3>Parent Tools</h3>
+        <ul>
+            <li>Progress Reports</li>
+            <li>Attendance</li>
+            <li>Fee Status</li>
+            <li>Communicate</li>
+            <li>School Events</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="widget">
+            <h2>Child Progress</h2>
+            <div class="progress-bars">
+                <div class="progress-item math" style="width: 75%">
+                    Mathematics: 75%
+                </div>
+                <div class="progress-item science" style="width: 82%">
+                    Science: 82%
+                </div>
+            </div>
+        </div>
+
+<!-- Add to parent-dashboard.html -->
+<div class="widget">
+    <h2>Performance Analytics</h2>
+    <div class="analytics-container">
+        <div class="radial-progress" style="--progress: 75">
+            <span>75%</span>
+        </div>
+        <div class="progress-key">
+            <div class="key-item math">Mathematics</div>
+            <div class="key-item science">Science</div>
+        </div>
+    </div>
+</div>
+<!-- Add to all dashboards -->
+<div class="notification-bell">
+    <span class="material-icons">notifications</span>
+    <span class="badge">3</span>
+</div>
+
+<div class="notification-panel">
+    <div class="notification-item">
+        <div class="notification-icon assignment"></div>
+        <div class="notification-content">
+            <h4>New Assignment Posted</h4>
+            <p>Physics Chapter 5 - Due Dec 15</p>
+        </div>
+    </div>
+</div>
+
+<style>
+.radial-progress {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(var(--secondary-color) calc(var(--progress)*1%), #eee 0);
+    display: grid;
+    place-items: center;
+}
+</style>
+        <div class="widget">
+            <h2>Attendance</h2>
+            <div class="attendance-chart">
+                <div class="attendance-day present">Mon</div>
+                <div class="attendance-day absent">Tue</div>
+                <div class="attendance-day present">Wed</div>
+            </div>
+        </div>
+
+        <div class="widget">
+            <h2>Teacher Communications</h2>
+            <div class="message-box">
+                <textarea placeholder="Write message to teacher..."></textarea>
+                <button class="send-btn">Send</button>
+            </div>
+        </div>
+    </main>
+</div>

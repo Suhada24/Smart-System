@@ -1,0 +1,94 @@
+<div class="dashboard">
+    <aside class="sidebar">
+        <h3>Admin Tools</h3>
+        <ul>
+            <li>User Management</li>
+            <li>Content Approval</li>
+            <li>System Settings</li>
+            <li>Analytics</li>
+            <li>Notifications</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="widget">
+            <h2>User Management</h2>
+            <div class="user-table">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td>Suhada Khan</td>
+                        <td>Teacher</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+<!-- Add to admin-dashboard.html -->
+<div class="widget">
+    <div class="table-header">
+        <h3>User Management</h3>
+        <div class="table-controls">
+            <input type="text" placeholder="Search users...">
+            <button class="export-btn">Export CSV</button>
+        </div>
+    </div>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Name <span class="sort-icon">▼</span></th>
+                <th>Role <span class="sort-icon">▼</span></th>
+                <th>Last Login</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic content via JS -->
+        </tbody>
+    </table>
+    <!-- Add to all dashboards -->
+<div class="notification-bell">
+    <span class="material-icons">notifications</span>
+    <span class="badge">3</span>
+</div>
+
+<div class="notification-panel">
+    <div class="notification-item">
+        <div class="notification-icon assignment"></div>
+        <div class="notification-content">
+            <h4>New Assignment Posted</h4>
+            <p>Physics Chapter 5 - Due Dec 15</p>
+        </div>
+    </div>
+</div>
+    <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+    </div>
+</div>
+        <div class="widget">
+            <h2>System Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Users</h4>
+                    <p>2,345</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Active Courses</h4>
+                    <p>156</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

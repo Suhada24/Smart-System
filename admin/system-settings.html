@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Smart University LMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Color Picker -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-colorpicker@3.4.0/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+    <!-- Admin Tools CSS -->
+    <link rel="stylesheet" href="../css/admin-tools.css">
+    <style>
+        /* Additional Bootstrap-compatible styles for System Settings */
+        .page-container {
+            padding-left: 250px;
+            transition: padding-left 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .page-container {
+                padding-left: 0;
+            }
+        }
+
+        .settings-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-section-header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .email-template-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .email-template-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-actions {
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            margin-top: 1rem;
+        }
+
+        .setting-card {
+            margin-bottom: 20px;
+        }
+
+        /* Loading Animation */
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .spinner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Alert styling */
+        .settings-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            min-width: 300px;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="brand-container">
+            <img src="../assests/images/logo.png" class="brand-logo" alt="LMS Logo" onerror="this.src='https://via.placeholder.com/40x40?text=SLU'">
+            <h1>Smart University</h1>
+        </div>
+        
+        <div class="nav-items">
+            <div class="theme-toggle" id="themeToggle">
+                <span class="material-icons light-icon">light_mode</span>
+                <span class="material-icons dark-icon">dark_mode</span>
+            </div>
+            
+            <div class="notification-container">
+                <span class="material-icons notification-bell" id="notificationBell">notifications</span>
+                <span class="notification-badge">3</span>
+                <div class="notification-panel" id="notificationPanel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <span class="material-icons" id="closeNotifications">close</span>
+                    </div>
+                    <div class="notification-list" id="notificationList">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="user-profile" id="userProfileMenu">
+                <img src="../assests/images/user-avatar.jpg" class="profile-pic" alt="User Avatar" onerror="this.src='https://via.placeholder.com/40x40?text=User'">
+                <div class="profile-info">
+                    <span class="user-name">Suhada Khan</span>
+                    <span class="user-role">Admin</span>
+                </div>
+                <span class="material-icons dropdown-icon">arrow_drop_down</span>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <ul>
+                        <li><span class="material-icons">person</span> My Profile</li>
+                        <li><span class="material-icons">settings</span> Settings</li>
+                        <li><span class="material-icons">help</span> Help</li>
+                        <li class="logout"><span class="material-icons">exit_to_app</span> Logout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <button class="mobile-nav-btn" data-role="admin">
+            <span class="material-icons">dashboard</span>
+            <span>Dashboard</span>
+        </button>
+        <button class="mobile-nav-btn" data-role="calendar">
+            <span class="material-icons">calendar_today</span>
+            <span>Calendar</span>
+        </button>
+        <button class="mobile-nav-btn" data-role="courses">
+            <span class="material-icons">book</span>
+            <span>Courses</span>
+        </button>
+        <button class="mobile-nav-btn" data-role="messages">
+            <span class="material-icons">message</span>
+            <span>Messages</span>
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Sidebar for desktop -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Navigation</h3>
+                <span class="material-icons mobile-close" id="closeSidebar">close</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item" data-role="home">
+                    <a href="../index.html">
+                        <span class="material-icons">home</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="sidebar-item" data-role="admin">
+                    <span class="material-icons">admin_panel_settings</span>
+                    <span>Admin</span>
+                </li>
+                <li class="sidebar-item has-submenu active" data-role="admin-tools">
+                    <span class="material-icons">build</span>
+                    <span>Admin Tools</span>
+                    <span class="material-icons dropdown-icon">expand_more</span>
+                    <ul class="submenu show">
+                        <li class="submenu-item" data-page="user-management">
+                            <a href="user-management.html">
+                                <span class="material-icons">people</span>
+                                <span>User Management</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item" data-page="content-approval">
+                            <a href="content-approval.html">
+                                <span class="material-icons">check_circle</span>
+                                <span>Content Approval</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item active" data-page="system-settings">
+                            <a href="system-settings.html">
+                                <span class="material-icons">settings</span>
+                                <span>System Settings</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item" data-page="analytics">
+                            <a href="analytics.html">
+                                <span class="material-icons">bar_chart</span>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item" data-page="notifications">
+                            <a href="notifications.html">
+                                <span class="material-icons">notifications</span>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item" data-role="teacher">
+                    <span class="material-icons">school</span>
+                    <span>Teacher</span>
+                </li>
+                <li class="sidebar-item" data-role="student">
+                    <span class="material-icons">person</span>
+                    <span>Student</span>
+                </li>
+                <li class="sidebar-item" data-role="parent">
+                    <span class="material-icons">people</span>
+                    <span>Parent</span>
+                </li>
+                <li class="sidebar-item" data-role="calendar">
+                    <span class="material-icons">calendar_today</span>
+                    <span>Calendar</span>
+                </li>
+                <li class="sidebar-item" data-role="messages">
+                    <span class="material-icons">message</span>
+                    <span>Messages</span>
+                </li>
+                <li class="sidebar-item" data-role="docs">
+                    <span class="material-icons">description</span>
+                    <span>Documentation</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main content -->
+        <main id="content-container" class="page-container">
+            <div class="container-fluid py-4">
+                <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="mb-0 fw-bold">System Settings</h1>
+                            <p class="text-muted">Configure your LMS platform settings</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-secondary me-2" id="resetSettingsBtn">
+                                <span class="material-icons align-middle me-1">restart_alt</span> Reset to Default
+                            </button>
+                            <button class="btn btn-primary" id="saveSettingsBtn">
+                                <span class="material-icons align-middle me-1">save</span> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="systemSettingsForm" novalidate>
+                    <!-- General Settings Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="settings-section">
+                                <div class="settings-section-header">
+                                    <h5 class="mb-0">
+                                        <span class="material-icons align-middle me-2">school</span>
+                                        General Settings
+                                    </h5>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="siteTitle" class="form-label">Site Title</label>
+                                        <input type="text" class="form-control" id="siteTitle" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a site title.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="siteDescription" class="form-label">Site Description</label>
+                                        <input type="text" class="form-control" id="siteDescription">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="adminEmail" class="form-label">Admin Email</label>
+                                        <input type="email" class="form-control" id="adminEmail" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="supportEmail" class="form-label">Support Email</label>
+                                        <input type="email" class="form-control" id="supportEmail" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid support email address.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="timezone" class="form-label">Default Timezone</label>
+                                        <select class="form-select" id="timezone" required>
+                                            <option value="">Select a timezone</option>
+                                            <option value="UTC-12:00">UTC-12:00</option>
+                                            <option value="UTC-11:00">UTC-11:00</option>
+                                            <option value="UTC-10:00">UTC-10:00</option>
+                                            <option value="UTC-09:00">UTC-09:00</option>
+                                            <option value="UTC-08:00">UTC-08:00 (Pacific Time)</option>
+                                            <option value="UTC-07:00">UTC-07:00 (Mountain Time)</option>
+                                            <option value="UTC-06:00">UTC-06:00 (Central Time)</option>
+                                            <option value="UTC-05:00">UTC-05:00 (Eastern Time)</option>
+                                            <option value="UTC-04:00">UTC-04:00</option>
+                                            <option value="UTC-03:00">UTC-03:00</option>
+                                            <option value="UTC-02:00">UTC-02:00</option>
+                                            <option value="UTC-01:00">UTC-01:00</option>
+                                            <option value="UTC+00:00">UTC+00:00</option>
+                                            <option value="UTC+01:00">UTC+01:00</option>
+                                            <option value="UTC+02:00">UTC+02:00</option>
+                                            <option value="UTC+03:00">UTC+03:00</option>
+                                            <option value="UTC+04:00">UTC+04:00</option>
+                                            <option value="UTC+05:00">UTC+05:00</option>
+                                            <option value="UTC+05:30">UTC+05:30 (India)</option>
+                                            <option value="UTC+06:00">UTC+06:00</option>
+                                            <option value="UTC+07:00">UTC+07:00</option>
+                                            <option value="UTC+08:00">UTC+08:00</option>
+                                            <option value="UTC+09:00">UTC+09:00 (Japan)</option>
+                                            <option value="UTC+10:00">UTC+10:00</option>
+                                            <option value="UTC+11:00">UTC+11:00</option>
+                                            <option value="UTC+12:00">UTC+12:00</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a timezone.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="dateFormat" class="form-label">Date Format</label>
+                                        <select class="form-select" id="dateFormat" required>
+                                            <option value="">Select a date format</option>
+                                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                            <option value="Month DD, YYYY">Month DD, YYYY</option>
+                                            <option value="DD Month YYYY">DD Month YYYY</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a date format.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="settings-section">
+                                <div class="settings-section-header">
+                                    <h5 class="mb-0">
+                                        <span class="material-icons align-middle me-2">palette</span>
+                                        Appearance Settings
+                                    </h5>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="primaryColor" class="form-label">Primary Color</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="primaryColor" value="#1a237e" required>
+                                            <span class="input-group-text p-0">
+                                                <div id="primaryColorPreview" class="color-preview" style="background-color: #1a237e;"></div>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please select a primary color.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="secondaryColor" class="form-label">Secondary Color</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="secondaryColor" value="#f57c00" required>
+                                            <span class="input-group-text p-0">
+                                                <div id="secondaryColorPreview" class="color-preview" style="background-color: #f57c00;"></div>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please select a secondary color.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="accentColor" class="form-label">Accent Color</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="accentColor" value="#2e7d32" required>
+                                            <span class="input-group-text p-0">
+                                                <div id="accentColorPreview" class="color-preview" style="background-color: #2e7d32;"></div>
+                                            </span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please select an accent color.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="defaultTheme" class="form-label">Default Theme</label>
+                                        <select class="form-select" id="defaultTheme" required>
+                                            <option value="">Select default theme</option>
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="system">Match System Preference</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a default theme.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fontFamily" class="form-label">Font Family</label>
+                                        <select class="form-select" id="fontFamily" required>
+                                            <option value="">Select font family</option>
+                                            <option value="'Poppins', sans-serif">Poppins</option>
+                                            <option value="'Roboto', sans-serif">Roboto</option>
+                                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                                            <option value="'Lato', sans-serif">Lato</option>
+                                            <option value="'Montserrat', sans-serif">Montserrat</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a font family.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableUserThemeSwitching">
+                                            <label class="form-check-label" for="enableUserThemeSwitching">Allow users to change theme</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Templates Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="settings-section">
+                                <div class="settings-section-header">
+                                    <h5 class="mb-0">
+                                        <span class="material-icons align-middle me-2">email</span>
+                                        Email Templates
+                                    </h5>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-3">Configure email templates sent to users. You can use the following placeholders:</p>
+                                    <ul class="mb-4">
+                                        <li><code>{user_name}</code> - The user's full name</li>
+                                        <li><code>{user_email}</code> - The user's email address</li>
+                                        <li><code>{site_name}</code> - Your site name</li>
+                                        <li><code>{login_url}</code> - Login page URL</li>
+                                        <li><code>{reset_url}</code> - Password reset URL</li>
+                                    </ul>
+                                    
+                                    <div class="list-group" id="emailTemplatesList">
+                                        <a href="#welcomeEmailTemplate" class="list-group-item list-group-item-action active" data-bs-toggle="list">Welcome Email</a>
+                                        <a href="#passwordResetTemplate" class="list-group-item list-group-item-action" data-bs-toggle="list">Password Reset</a>
+                                        <a href="#accountActivationTemplate" class="list-group-item list-group-item-action" data-bs-toggle="list">Account Activation</a>
+                                        <a href="#courseEnrollmentTemplate" class="list-group-item list-group-item-action" data-bs-toggle="list">Course Enrollment</a>
+                                        <a href="#assignmentTemplate" class="list-group-item list-group-item-action" data-bs-toggle="list">Assignment Notification</a>
+                                    </div>
+                                </div>
+
+                                <div class="tab-content mt-3">
+                                    <div class="tab-pane fade show active" id="welcomeEmailTemplate">
+                                        <h6 class="mb-3">Welcome Email</h6>
+                                        <div class="mb-3">
+                                            <label for="welcomeEmailSubject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="welcomeEmailSubject" required>
+                                            <div class="invalid-feedback">
+                                                Please enter an email subject.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="welcomeEmailContent" class="form-label">Email Content</label>
+                                            <textarea class="form-control" id="welcomeEmailContent" rows="6" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter email content.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="passwordResetTemplate">
+                                        <h6 class="mb-3">Password Reset Email</h6>
+                                        <div class="mb-3">
+                                            <label for="passwordResetSubject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="passwordResetSubject" required>
+                                            <div class="invalid-feedback">
+                                                Please enter an email subject.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="passwordResetContent" class="form-label">Email Content</label>
+                                            <textarea class="form-control" id="passwordResetContent" rows="6" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter email content.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="accountActivationTemplate">
+                                        <h6 class="mb-3">Account Activation Email</h6>
+                                        <div class="mb-3">
+                                            <label for="accountActivationSubject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="accountActivationSubject" required>
+                                            <div class="invalid-feedback">
+                                                Please enter an email subject.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="accountActivationContent" class="form-label">Email Content</label>
+                                            <textarea class="form-control" id="accountActivationContent" rows="6" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter email content.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="courseEnrollmentTemplate">
+                                        <h6 class="mb-3">Course Enrollment Email</h6>
+                                        <div class="mb-3">
+                                            <label for="courseEnrollmentSubject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="courseEnrollmentSubject" required>
+                                            <div class="invalid-feedback">
+                                                Please enter an email subject.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="courseEnrollmentContent" class="form-label">Email Content</label>
+                                            <textarea class="form-control" id="courseEnrollmentContent" rows="6" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter email content.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="assignmentTemplate">
+                                        <h6 class="mb-3">Assignment Notification Email</h6>
+                                        <div class="mb-3">
+                                            <label for="assignmentSubject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="assignmentSubject" required>
+                                            <div class="invalid-feedback">
+                                                Please enter an email subject.
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="assignmentContent" class="form-label">Email Content</label>
+                                            <textarea class="form-control" id="assignmentContent" rows="6" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter email content.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-actions d-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-secondary me-2" id="resetFormBtn">
+                                    <span class="material-icons align-middle me-1">restart_alt</span> Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="submitSettingsBtn">
+                                    <span class="material-icons align-middle me-1">save</span> Save All Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Loading spinner -->
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Alerts container -->
+    <div id="alertsContainer"></div>
+    
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Color Picker -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-colorpicker@3.4.0/dist/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="../script.js"></script>
+    <!-- Admin Tools JS -->
+    <script src="../js/admin-tools.js"></script>
+    <script src="../api/admin/systemSettings.js"></script>
+    <script>
+        // Initialize System Settings functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize system settings
+            initSystemSettings();
+        });
+    </script>
+</body>
+</html> 
